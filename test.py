@@ -56,8 +56,47 @@ def controlAll(router):
                 status = addTrafficControlledUser(router,ip,up_rate_ceiling=50, down_rate_ceiling=100, up_rate_floor=10,down_rate_floor=10)
                 print(status,end="\n\n")
 
+def controlCurrent(router):
+    if router.is_loggedIn:
+        currentConnections = getCurrentConnections(router)
+        trafficControlledIPs = getTrafficControlledConnections(router)
+
+        #remove all trafficControlledIPs
+        for conn in trafficControlledIPs:
+            print(conn)
+            removeQ = conn['removeQ']
+            status = deleteTrafficControlledUser(router,removeQ)
+            print(status,end="\n")
+
+        #lets make them static
+        staticIPs = getCurrentStaticIPConnections(router)
+        for conn in currentConnections:
+            print(conn)
+            ip = conn["IP_Address"]
+            mac = conn["MAC_Address"]
+            if mac.lower() not in get_mac_list(staticIPs):
+                status = addStaticIPUser(router,ip,mac)
+                print(status,end="\n") 
+            else:
+                print("IP already static")
+        
+        
+        trafficControlledIPs = getTrafficControlledConnections(router)
+        for conn in currentConnections:
+            print(conn)
+            ip = conn['IP_Address']
+            mac = conn["MAC_Address"]
+            if mac.lower() in IGNORE_MAC:
+                print(f"{mac}<-> {ip} it is a part of protected list.",end="\n\n")  # type: ignore
+            elif ( ip in get_ip_list(trafficControlledIPs) ):
+                print(f"IP {ip} is already controlled.")
+            else:
+                status = addTrafficControlledUser(router,ip,up_rate_ceiling=50, down_rate_ceiling=100, up_rate_floor=10,down_rate_floor=10)
+                print(status,end="\n\n")
+
 
 router = Router()
 router.login()
 # removeAll(router)
-controlAll(router)
+# controlAll(router)
+controlCurrent(router)
