@@ -23,13 +23,6 @@ Take full control of your WiFi network with this powerful Python-based router tr
    python test.py
    ```
 
-## 📌 Usage
-
-- **Remove a user:** `python main.py --remove-user <MAC/IP>`
-- **Add a user:** `python main.py --add-user <MAC/IP>`
-- **Set bandwidth limit:** `python main.py --set-speed <MAC/IP> <UpSpeed> <DownSpeed>`
-- **Whitelist a user:** `python main.py --whitelist <MAC/IP>`
-- **View logs:** `python main.py --logs`
 
 ## 📢 Disclaimer
 This tool is designed for **educational purposes only** and should be used responsibly on networks you own or have permission to control. 🛑⚠️
