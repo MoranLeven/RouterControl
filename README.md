@@ -1,4 +1,4 @@
-# 🚀 WiFi Router User Traffic Controller
+# 🚀 WiFi Router User Traffic Controller (⚠️Support's only TPLink router)
 
 Take full control of your WiFi network with this powerful Python-based router traffic manager! 🛜💻
 
