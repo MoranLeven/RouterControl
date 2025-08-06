@@ -1,5 +1,7 @@
 import json 
 
+
+#need to replace them with (with) context manager
 def saveCurrentUserList(data):
     file = open('currentUsers.json',"w+")
     file.write(data)
